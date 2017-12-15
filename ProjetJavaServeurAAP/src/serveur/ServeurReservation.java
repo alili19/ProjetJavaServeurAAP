@@ -6,6 +6,10 @@ import java.net.ServerSocket;
 public class ServeurReservation implements Runnable {
 	private ServerSocket listen_socket_reservation;
 	
+	// Le serveur ecoute et accepte les connections.
+	// pour chaque connection, il cree un ServiceInversion, 
+	// qui va la traiter.
+	
 	@Override
 	public void run() {
 		try{
@@ -18,6 +22,7 @@ public class ServeurReservation implements Runnable {
 		}
 	}
 	
+	// restituer les ressources --> finalize
 	protected void finalize() throws Throwable{
 		try{this.listen_socket_reservation.close();}catch(IOException e){}
 

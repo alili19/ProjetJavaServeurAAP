@@ -1,5 +1,6 @@
 package serveur;
 
+import java.io.IOException;
 import java.net.Socket;
 
 public class ServiceReservation implements Runnable{
@@ -16,12 +17,24 @@ public class ServiceReservation implements Runnable{
 	@Override
 	public void run() {
 		
+	/*	try{
+			
+		}catch(IOException e){
+			
+		}
+		*/
+		
+		//Fin du service d'inversion
+		System.out.println("*********Connexion terminée");
+		try {client.close();} catch (IOException e2) {}
 	}
 
-
 	public void lancer() {
-		// TODO Auto-generated method stub
-		
+		new Thread(this).start();			
+	}
+	
+	protected void finalize() throws Throwable {
+		 client.close(); 
 	}
 
 }

@@ -1,8 +1,7 @@
-/Document.class
 /Abonne.class
-/PasLibreException.class
-/serveur/
-/client/
-/exceptions/
+/Document.class
 /Livre.class
-/Livre2.class
+/PasLibreException.class
+/client/
+/serveur/
+/EtatLivre.class

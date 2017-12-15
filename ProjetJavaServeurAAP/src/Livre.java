@@ -1,12 +1,16 @@
 
 public class Livre implements Document{
 	private int numero;
-	private String titre;
-	private String auteur;
-	private boolean emprunté;
+	/*private String titre;
+	private String auteur;*/
+	private EtatLivre etat;
+	private Abonne abonne;
 	
+
 	private Livre(){
-		this.emprunté=false;
+		this.numero = 1;
+		this.etat = EtatLivre.Disponible;
+				
 	}
 	
 	@Override
@@ -16,20 +20,29 @@ public class Livre implements Document{
 
 	@Override
 	public void reserver(Abonne ab) throws PasLibreException {
-		// TODO Auto-generated method stub
-		
+		setEtat(EtatLivre.Reserve);
 	}
 
 	@Override
 	public void emprunter(Abonne ab) throws PasLibreException {
-		// TODO Auto-generated method stub
-		
+		if (etat == EtatLivre.Emprunte || etat == EtatLivre.Reserve){
+			throw new PasLibreException("le livre n'est pas disponible");
+		}
+		setEtat(EtatLivre.Emprunte);
+		this.abonne= ab;
 	}
 
 	@Override
 	public void retour() {
-		// TODO Auto-generated method stub
-		
+		setEtat(EtatLivre.Disponible);
+	}
+	
+	public EtatLivre getEtat() {
+		return etat;
+	}
+
+	public void setEtat(EtatLivre etat) {
+		this.etat = etat;
 	}
 
 }
