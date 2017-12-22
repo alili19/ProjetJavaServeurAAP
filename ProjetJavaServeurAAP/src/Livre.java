@@ -1,16 +1,25 @@
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Livre implements Document{
 	private int numero;
-	/*private String titre;
-	private String auteur;*/
 	private EtatLivre etat;
 	private Abonne abonne;
+	private MonTimer timer = new MonTimer();
+	private Timer montimer = new Timer();
 	
-
 	private Livre(){
 		this.numero = 1;
 		this.etat = EtatLivre.Disponible;
 				
+	}
+	
+	public Abonne getAbonne() {
+		return abonne;
+	}
+
+	public void setAbonne(Abonne abonne) {
+		this.abonne = abonne;
 	}
 	
 	@Override
@@ -20,20 +29,27 @@ public class Livre implements Document{
 
 	@Override
 	public void reserver(Abonne ab) throws PasLibreException {
-		setEtat(EtatLivre.Reserve);
+		if (this.etat==EtatLivre.Emprunte || this.etat==EtatLivre.Reserve){
+			throw new PasLibreException("Le livre "+this.numero+ " n'est pas disponible"); 
+		}
+		else{ 
+			montimer.schedule(timer, 7200000);
+			setEtat(EtatLivre.Reserve);
+			this.abonne= ab;
+		}
 	}
 
 	@Override
 	public void emprunter(Abonne ab) throws PasLibreException {
-		if (etat == EtatLivre.Emprunte || etat == EtatLivre.Reserve){
-			throw new PasLibreException("le livre n'est pas disponible");
+		if (etat == EtatLivre.Emprunte /* ||!bonnePersonne(ab, this)*/){
+			throw new PasLibreException("Le livre "+this.numero+ " n'est pas disponible");
 		}
-		setEtat(EtatLivre.Emprunte);
-		this.abonne= ab;
+		else setEtat(EtatLivre.Emprunte);
 	}
 
+	
 	@Override
-	public void retour() {
+	public void retour(){
 		setEtat(EtatLivre.Disponible);
 	}
 	
@@ -45,4 +61,5 @@ public class Livre implements Document{
 		this.etat = etat;
 	}
 
+	
 }

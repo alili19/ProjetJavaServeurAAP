@@ -2,9 +2,11 @@ package serveur;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.Timer;
 
 public class ServeurReservation implements Runnable {
 	private ServerSocket listen_socket_reservation;
+	private Timer timer;
 	
 	// Le serveur ecoute et accepte les connections.
 	// pour chaque connection, il cree un ServiceInversion, 
