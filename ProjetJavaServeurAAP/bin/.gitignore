@@ -1,9 +1,11 @@
 /Abonne.class
+/Bibliotheque.class
 /Document.class
 /EtatLivre.class
 /Livre.class
+/MonTimer.class
 /PasLibreException.class
 /client/
 /serveur/
-/Bibliotheque.class
-/MonTimer.class
+/Livre$1.class
+/chaipa/

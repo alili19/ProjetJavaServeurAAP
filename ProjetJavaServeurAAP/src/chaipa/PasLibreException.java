@@ -1,4 +1,4 @@
-
+package chaipa;
 
 public class PasLibreException extends Exception {
 	

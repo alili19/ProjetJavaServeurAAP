@@ -1,4 +1,4 @@
-
+package chaipa;
 public interface Document {
 	int numero();
 	void reserver(Abonne ab) throws PasLibreException ;

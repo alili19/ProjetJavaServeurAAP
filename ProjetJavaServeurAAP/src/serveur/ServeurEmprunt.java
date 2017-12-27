@@ -24,7 +24,6 @@ public class ServeurEmprunt implements Runnable {
 		// restituer les ressources --> finalize
 		protected void finalize() throws Throwable{
 			try{this.listen_socket_emprunt.close();}catch(IOException e){}
-
 		}
 
 }

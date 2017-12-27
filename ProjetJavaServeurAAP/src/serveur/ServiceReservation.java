@@ -3,11 +3,13 @@ package serveur;
 import java.io.IOException;
 import java.net.Socket;
 
+import chaipa.Bibliotheque;
+
 public class ServiceReservation implements Runnable{
 
 	private static final int PORT=2500;
 	private final Socket client;
-
+	private Bibliotheque bibli;
 	
 	public ServiceReservation(Socket socketClient) {
 		this.client= socketClient;
@@ -16,17 +18,7 @@ public class ServiceReservation implements Runnable{
 	
 	@Override
 	public void run() {
-		
-	/*	try{
-			
-		}catch(IOException e){
-			
-		}
-		*/
-		
-		//Fin du service d'inversion
-		System.out.println("*********Connexion terminée");
-		try {client.close();} catch (IOException e2) {}
+		/*bibli.reserver(numLivre, numAbonne);*/
 	}
 
 	public void lancer() {
