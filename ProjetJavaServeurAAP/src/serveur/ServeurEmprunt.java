@@ -6,6 +6,12 @@ public class ServeurEmprunt implements Runnable {
 
 		private ServerSocket listen_socket_emprunt;
 		
+		
+		// Cree un serveur TCP - objet de la classe ServerSocket
+		ServeurEmprunt(int port) throws IOException {
+			listen_socket_emprunt = new ServerSocket(port);
+		}
+		
 		// Le serveur ecoute et accepte les connections.
 		// pour chaque connection, il cree un ServiceInversion, 
 		// qui va la traiter.

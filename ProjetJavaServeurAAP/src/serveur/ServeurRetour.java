@@ -6,6 +6,10 @@ public class ServeurRetour implements Runnable{
 
 			private ServerSocket listen_socket_retour;
 			
+			// Cree un serveur TCP - objet de la classe ServerSocket
+			ServeurRetour(int port) throws IOException {
+				listen_socket_retour = new ServerSocket(port);
+			}
 			// Le serveur ecoute et accepte les connections.
 			// pour chaque connection, il cree un ServiceInversion, 
 			// qui va la traiter.

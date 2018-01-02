@@ -8,6 +8,12 @@ public class ServeurReservation implements Runnable {
 	private ServerSocket listen_socket_reservation;
 	private Timer timer;
 	
+	
+	// Cree un serveur TCP - objet de la classe ServerSocket
+		ServeurReservation(int port) throws IOException {
+			listen_socket_reservation = new ServerSocket(port);
+		}
+	
 	// Le serveur ecoute et accepte les connections.
 	// pour chaque connection, il cree un ServiceInversion, 
 	// qui va la traiter.
