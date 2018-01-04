@@ -1,6 +1,9 @@
 package client;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -27,6 +30,32 @@ public static void main(String[] args) {
 		default:
 			break;
 		}
+
+		socket = new Socket(HOST, PORT);
+		BufferedReader sin = new BufferedReader (new InputStreamReader(socket.getInputStream ( )));
+		PrintWriter sout = new PrintWriter (socket.getOutputStream ( ), true);
+		// Cree le stream pour lire du texte a partir du clavier 
+		// (on pourrait aussi utiliser Scanner)
+		BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));			
+		// Informe l'utilisateur de la connection
+		System.out.println("Connecté au serveur " + socket.getInetAddress() + ":"+ socket.getPort());
+		
+		String line;
+		
+		System.out.println(sin.readLine());
+		line = clavier.readLine();
+		// envoie au serveur
+		sout.println(line);
+		// lit la réponse provenant du serveur
+		line = sin.readLine();
+		// Verifie si la connection est fermee.
+		// Si oui on sort de la boucle
+		if (line == null) { 
+			System.out.println("Connection fermee par le serveur."); 
+		} else
+			// Ecrit la ligne envoyee par le serveur
+			System.out.println(line);
+		
 		socket.close();
 	}
 	catch (IOException e) { System.err.println(e); }

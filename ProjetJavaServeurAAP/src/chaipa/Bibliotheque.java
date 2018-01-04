@@ -72,14 +72,14 @@ public class Bibliotheque {
 	
 	public void emprunter(int numLivre, int numAbonne) throws PasLibreException{
 		Livre l = retrouverLivre(numLivre);
-		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre))){
+		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre)) ){ // si numAbonne est l'abonne qui a bien reservé ce livre
 			l.emprunter(retrouverAbonne(numAbonne));
 		}
 	}
 	
 	public void reserver(int numLivre, int numAbonne) throws PasLibreException{
 		Livre l = retrouverLivre(numLivre);
-		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre))){
+		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre))){ // PQ
 			l.reserver(retrouverAbonne(numAbonne));
 		}
 	}
