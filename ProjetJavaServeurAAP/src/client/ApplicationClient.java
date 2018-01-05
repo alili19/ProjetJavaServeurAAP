@@ -35,22 +35,22 @@ public static void main(String[] args) {
 		}
 
 		socket = new Socket(HOST, PORT);
-		BufferedReader sin = new BufferedReader (new InputStreamReader(socket.getInputStream ( )));
-		PrintWriter sout = new PrintWriter (socket.getOutputStream ( ), true);
-		// Cree le stream pour lire du texte a partir du clavier 
-		// (on pourrait aussi utiliser Scanner)
-		BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));			
+		
 		// Informe l'utilisateur de la connection
 		System.out.println("Connecté au serveur " + socket.getInetAddress() + ":"+ socket.getPort());
+		PrintWriter sout = new PrintWriter (socket.getOutputStream ( ), true);
+		
+		// Cree le stream pour lire du texte a partir du clavier 
+		// (on pourrait aussi utiliser Scanner)
+		System.out.println("Entrez votre numero de livre puis cliquez sur entrez votre numéro d'abonné");
+		BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));	
 		
 		String line;
 		
-		System.out.println(sin.readLine());
 		line = clavier.readLine();
 		// envoie au serveur
 		sout.println(line);
-		// lit la réponse provenant du serveur
-		line = sin.readLine();
+	
 		// Verifie si la connection est fermee.
 		// Si oui on sort de la boucle
 		if (line == null) { 
@@ -58,12 +58,13 @@ public static void main(String[] args) {
 		} else
 			// Ecrit la ligne envoyee par le serveur
 			System.out.println(line);
-		
 		socket.close();
+	
 	}
 	catch (IOException e) { System.err.println(e); }
 	// Refermer dans tous les cas la socket
 	try { if (socket != null) socket.close(); } 
-	catch (IOException e2) { ; }		
+	catch (IOException e2) { ; }	
+
 }
 }

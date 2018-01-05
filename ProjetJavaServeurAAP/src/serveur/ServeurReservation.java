@@ -2,16 +2,17 @@ package serveur;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.Timer;
+
+import chaipa.Bibliotheque;
 
 public class ServeurReservation implements Runnable {
 	private ServerSocket listen_socket_reservation;
-	private Timer timer;
-	
+	private Bibliotheque bibli;
 	
 	// Cree un serveur TCP - objet de la classe ServerSocket
-		ServeurReservation(int port) throws IOException {
+		ServeurReservation(int port, Bibliotheque bibliotheque) throws IOException {
 			listen_socket_reservation = new ServerSocket(port);
+			this.bibli=bibliotheque;
 		}
 	
 	// Le serveur ecoute et accepte les connections.
@@ -22,7 +23,7 @@ public class ServeurReservation implements Runnable {
 	public void run() {
 		try{
 			while(true){
-				new ServiceReservation(listen_socket_reservation.accept()).lancer();
+				new ServiceReservation(listen_socket_reservation.accept(),bibli).lancer();
 			}
 		}catch(IOException e){
 			try{this.listen_socket_reservation.close();}catch(IOException a){}

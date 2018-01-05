@@ -9,7 +9,7 @@ public class Livre implements Document{
 	private Abonne abonne;
 	private Timer timer;
 	
-	private Livre(){
+	public Livre(){
 		this.numero = cpt++;
 		this.etat = EtatLivre.Disponible;
 		this.timer= new Timer();
@@ -34,9 +34,6 @@ public class Livre implements Document{
 			throw new PasLibreException("Le livre "+this.numero+ " n'est pas disponible"); 
 		}
 		else{
-			/*
-			montimer.schedule(timer,7200000);
-			setEtat(EtatLivre.Reserve);*/
 			
 			/*dans tous les cas le livre est reserve*/
 			setEtat(EtatLivre.Reserve);

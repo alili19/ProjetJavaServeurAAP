@@ -79,9 +79,9 @@ public class Bibliotheque {
 	
 	public void reserver(int numLivre, int numAbonne) throws PasLibreException{
 		Livre l = retrouverLivre(numLivre);
-		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre))){ // PQ
+		//if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre))){ 
 			l.reserver(retrouverAbonne(numAbonne));
-		}
+		//}
 	}
 	
 	public void retourner(int numLivre){
