@@ -10,7 +10,6 @@ import chaipa.Bibliotheque;
 public class ServiceEmprunt implements Runnable{
 
 	private static final int PORT=2600;
-	private Bibliotheque bibli;
 	private Socket client;
 	
 	public ServiceEmprunt(Socket accept) {
@@ -19,12 +18,15 @@ public class ServiceEmprunt implements Runnable{
 
 	@Override
 	public void run() {
+		
+		
 		/*je pense que nous devons par un fichier afin de pouvoir conservé les données
 		 *  entrées par le client (le numLivre et le numAbonnée)
-		
-		
-		
+	
 		bibli.emprunter(numLivre, numAbonne);*/
+		
+		
+		
 	}
 
 	public void lancer() {

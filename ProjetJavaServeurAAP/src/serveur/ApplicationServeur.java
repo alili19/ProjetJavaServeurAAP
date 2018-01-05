@@ -2,11 +2,14 @@ package serveur;
 
 import java.io.IOException;
 
-public class ApplicationServeur {
+import chaipa.Bibliotheque;
 
-	private final static int PORTRESERVATION = 2500;
-	private final static int PORTEMPRUNT = 2600;
-	private final static int PORTRETOUR = 2700;
+public class ApplicationServeur {
+	
+	private final static int PORT_RESERVATION = 2500;
+	private final static int PORT_EMPRUNT = 2600;
+	private final static int PORT_RETOUR = 2700;
+	private Bibliotheque bibli;
 	
 	public static void main(String[] args) {
 //		try {

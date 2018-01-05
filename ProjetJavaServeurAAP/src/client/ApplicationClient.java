@@ -14,7 +14,10 @@ public class ApplicationClient {
 public static void main(String[] args) {
 	Socket socket = null;	
 	Scanner sc = new Scanner(System.in);
-	System.out.println("Bonjour, que souhaitez-vous faire ? \n 1.Reserver un livre \n 2.Emprunter un livre \n 3. Retourner un livre");
+	System.out.println("Bonjour, que souhaitez-vous faire ? "
+			+ "\n 1.Reserver un livre "
+			+ "\n 2.Emprunter un livre "
+			+ "\n 3. Retourner un livre");
 	int str = sc.nextInt();
 	try {
 		switch (str) {

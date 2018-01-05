@@ -1,5 +1,6 @@
 package chaipa;
 
+@SuppressWarnings("serial")
 public class PasLibreException extends Exception {
 	
 	private Document document;
