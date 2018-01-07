@@ -22,20 +22,23 @@ public class ServiceReservation implements Runnable{
 	
 	@Override
 	public void run() {
+		System.out.println("-----Conexion démarrée-----");
 		try {
-
 			BufferedReader lecture = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			PrintWriter ecriture= new PrintWriter(client.getOutputStream ( ), true);
 			String line = lecture.readLine();
 			String[] words = line.split(";");
 			int numLivre=Integer.parseUnsignedInt(words[0]);
 			int numConnect=Integer.parseUnsignedInt(words[1]);
+			String invLine = new String (new StringBuffer(line).reverse());
 			bibli.reserver(numLivre, numConnect);
-			System.out.println("alison "+ bibli.retrouverLivre(numLivre).getEtat());
+			System.out.println("alison "+ "--"+numLivre+"--" + bibli.retrouverLivre(numLivre).getEtat());
+			//ecriture.println(invLine);
 			ecriture.println("Le livre "+ numLivre + " a bien été reservé");
 		} catch (PasLibreException | IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("-----Conexion terminée-----");
 	}
 
 	public void lancer() {

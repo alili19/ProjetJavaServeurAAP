@@ -37,19 +37,22 @@ public static void main(String[] args) {
 		socket = new Socket(HOST, PORT);
 		
 		// Informe l'utilisateur de la connection
-		System.out.println("Connecté au serveur " + socket.getInetAddress() + ":"+ socket.getPort());
+		System.out.println("Connecté au serveur " + socket.getInetAddress() + " : "+ socket.getPort());
+		BufferedReader lecture = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		PrintWriter sout = new PrintWriter (socket.getOutputStream ( ), true);
 		
 		// Cree le stream pour lire du texte a partir du clavier 
 		// (on pourrait aussi utiliser Scanner)
-		System.out.println("Entrez votre numero de livre puis cliquez sur entrez votre numéro d'abonné");
 		BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));	
 		
 		String line;
-		
+		System.out.println("Entrez votre numero de livre puis cliquez sur entrez votre numéro d'abonné");
 		line = clavier.readLine();
 		// envoie au serveur
 		sout.println(line);
+		
+		// lit la réponse provenant du serveur
+		line = lecture.readLine();
 	
 		// Verifie si la connection est fermee.
 		// Si oui on sort de la boucle

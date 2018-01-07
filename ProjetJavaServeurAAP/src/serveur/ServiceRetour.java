@@ -26,9 +26,12 @@ public class ServiceRetour implements Runnable{
 			try {
 				BufferedReader lecture = new BufferedReader(new InputStreamReader(client.getInputStream()));
 				PrintWriter ecriture= new PrintWriter(client.getOutputStream ( ), true);
-				int numLivre=Integer.parseUnsignedInt(lecture.readLine());
+				String line = lecture.readLine();
+				String[] words = line.split(";");
+				int numLivre=Integer.parseUnsignedInt(words[0]);
+				int numConnect=Integer.parseUnsignedInt(words[1]);
 				bibli.retour(numLivre);
-				
+				System.out.println("Le livre "+ bibli.retrouverLivre(numLivre).getEtat() +" est de nouveau disponible");
 				ecriture.print("Le livre "+ numLivre + " a bien été retourné");
 			} catch (IOException e) {
 				e.printStackTrace();
