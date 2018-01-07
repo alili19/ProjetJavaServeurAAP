@@ -13,12 +13,11 @@ public class ApplicationServeur {
 	private static Bibliotheque bibli=new Bibliotheque();
 	
 	public static void main(String[] args) {
+	//creation de la bibliotheque
 	Livre l1 = new Livre();
 	Livre l2 = new Livre();
-	
 	Abonne a1 = new Abonne();
 	Abonne a2 = new Abonne();
-	
 	
 	bibli.ajouterLivre(l1);
 	bibli.ajouterLivre(l2);

@@ -26,6 +26,8 @@ public class Serveur implements Runnable{
 	public void run() {
 		try{
 			while(true){
+				new Service(listen_socket.accept(),bibli,PORT).lancer();
+			/*	
 				if( PORT == 2500){
 					new ServiceReservation(listen_socket.accept(),bibli).lancer();
 				}
@@ -34,7 +36,7 @@ public class Serveur implements Runnable{
 				}
 				if( PORT == 2700){
 					new ServiceRetour(listen_socket.accept(),bibli).lancer();
-				}
+				}*/
 			}
 		} catch(IOException e){
 				try{
