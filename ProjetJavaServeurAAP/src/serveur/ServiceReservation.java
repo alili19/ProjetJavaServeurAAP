@@ -38,7 +38,6 @@ public class ServiceReservation implements Runnable{
 		} catch (PasLibreException | IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("-----Conexion terminée-----");
 	}
 
 	public void lancer() {
