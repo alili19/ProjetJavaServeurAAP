@@ -30,7 +30,7 @@ public class ServiceReservation implements Runnable{
 			String[] words = line.split(";");
 			int numLivre=Integer.parseUnsignedInt(words[0]);
 			int numConnect=Integer.parseUnsignedInt(words[1]);
-			String invLine = new String (new StringBuffer(line).reverse());
+			//String invLine = new String (new StringBuffer(line).reverse());
 			bibli.reserver(numLivre, numConnect);
 			System.out.println("alison "+ "--"+numLivre+"--" + bibli.retrouverLivre(numLivre).getEtat());
 			//ecriture.println(invLine);
