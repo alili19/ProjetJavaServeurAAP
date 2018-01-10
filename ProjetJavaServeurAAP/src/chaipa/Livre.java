@@ -40,7 +40,8 @@ public class Livre implements Document{
 			this.abonne=ab;
 				
 			
-	        long time = 7200000; // délai defini avant d'effectuer la tache
+	        long time = 2*60*1000;
+	        		//7200000; // délai defini avant d'effectuer la tache
 	        TimerTask rendrelivreDispo = new TimerTask() {     // création et spécification de la tache à effectuer
 	            @Override
 	                public void run() {

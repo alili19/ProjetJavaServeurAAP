@@ -3,6 +3,7 @@ package serveur;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 import chaipa.Bibliotheque;
@@ -24,6 +25,7 @@ public class Service implements Runnable{
 		
 		try {
 			BufferedReader lecture = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			PrintWriter ecriture = new PrintWriter(client.getOutputStream ( ), true);
 			String line = lecture.readLine();
 			String[] words= line.split(";");
 			int numLivre= Integer.parseInt(words[0]);
@@ -38,7 +40,7 @@ public class Service implements Runnable{
 					bibli.retour(numLivre);
 				}			
 				
-				System.out.println("Le livre est "+ bibli.retrouverLivre(numLivre).getEtat());
+				ecriture.println("Le livre est "+ bibli.retrouverLivre(numLivre).getEtat());
 
 		} catch (IOException | PasLibreException e) {
 				e.printStackTrace();
