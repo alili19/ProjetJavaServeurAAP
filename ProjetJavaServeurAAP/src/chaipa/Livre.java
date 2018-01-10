@@ -4,11 +4,27 @@ import java.util.TimerTask;
 
 public class Livre implements Document{
 	private int numero;
+	public int getNumero() {
+		return numero;
+	}
+
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
 	private static int cpt=0;
 	private EtatLivre etat;
 	private Abonne abonne;
 	private Timer timer;
 	
+	public Timer getTimer() {
+		return timer;
+	}
+
+	public void setTimer(Timer timer) {
+		this.timer = timer;
+	}
+
 	public Livre(){
 		this.numero = cpt++;
 		this.etat = EtatLivre.Disponible;
@@ -48,10 +64,7 @@ public class Livre implements Document{
 	            		if(etat!= EtatLivre.Emprunte){
 		                    setEtat(EtatLivre.Disponible);
 		                    abonne=null;
-		                	System.out.println("Le temps est écoulé, "
-		            				+ "le livre que vous avez réservé ne peut "
-		            				+ "plus être emprunté");
-		                    this.cancel();	
+		                    this.cancel();
 	                    }
 	                }
 	        };
@@ -62,11 +75,19 @@ public class Livre implements Document{
 	     }
 	}
 	
-
+	public String retourTempsEcouléClient(){
+     	return "Le temps est écoulé, "
+				+ "le livre que vous avez réservé ne peut "
+				+ "plus être emprunté";
+	}
+	
 	@Override
 	public void emprunter(Abonne ab) throws PasLibreException {
 		if (etat == EtatLivre.Emprunte){
 			throw new PasLibreException("Le livre "+this.numero+ " n'est pas disponible");
+		}
+		if(abonne==null){
+			abonne=ab;
 		}
 		else setEtat(EtatLivre.Emprunte);
 	}

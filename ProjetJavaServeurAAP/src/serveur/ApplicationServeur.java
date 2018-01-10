@@ -44,7 +44,6 @@ public class ApplicationServeur {
 				default:
 					break;
 			}
-
 			try {
 				new Thread(new Serveur(PORT,bibli)).start();
 				System.out.println("Serveur lancé sur le port "+PORT);

@@ -72,7 +72,7 @@ public class Bibliotheque {
 	
 	public void emprunter(int numLivre, int numAbonne) throws PasLibreException{
 		Livre l = retrouverLivre(numLivre);
-		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre)) ){ // si numAbonne est l'abonne qui a bien reservé ce livre
+		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre)) || l.getEtat()==EtatLivre.Disponible){ // si numAbonne est l'abonne qui a bien reservé ce livre
 			l.emprunter(retrouverAbonne(numAbonne));
 		}
 	}

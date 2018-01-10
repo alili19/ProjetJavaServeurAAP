@@ -34,13 +34,14 @@ public class Service implements Runnable{
 					bibli.reserver(numLivre, numAbonne);
 				}
 				if( PORT == 2600){
-					bibli.emprunter(numLivre, numAbonne);	
+					bibli.emprunter(numLivre, numAbonne);
 				}
 				if( PORT == 2700){
 					bibli.retour(numLivre);
 				}			
 				
 				ecriture.println("Le livre est "+ bibli.retrouverLivre(numLivre).getEtat());
+			
 
 		} catch (IOException | PasLibreException e) {
 				e.printStackTrace();
