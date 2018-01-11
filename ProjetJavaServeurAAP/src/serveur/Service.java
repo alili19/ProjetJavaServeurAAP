@@ -32,12 +32,17 @@ public class Service implements Runnable{
 			int numAbonne=Integer.parseInt(words[1]);					
 				if( PORT == 2500){
 					bibli.reserver(numLivre, numAbonne);
+					ecriture.println("Vous venez de vous connecté au service de réservation");
+
 				}
 				if( PORT == 2600){
 					bibli.emprunter(numLivre, numAbonne);
+					ecriture.println("Vous venez de vous connecté au service d'emprunt");
+
 				}
 				if( PORT == 2700){
 					bibli.retour(numLivre);
+					ecriture.println("Vous venez de vous connecté au service de retour");
 				}			
 				
 				ecriture.println("Le livre est "+ bibli.retrouverLivre(numLivre).getEtat());

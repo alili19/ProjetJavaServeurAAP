@@ -56,7 +56,7 @@ public class Livre implements Document{
 			this.abonne=ab;
 				
 			
-	        long time = 2*60*1000;
+	        long time = 30*1000;
 	        		//7200000; // délai defini avant d'effectuer la tache
 	        TimerTask rendrelivreDispo = new TimerTask() {     // création et spécification de la tache à effectuer
 	            @Override
@@ -64,6 +64,7 @@ public class Livre implements Document{
 	            		if(etat!= EtatLivre.Emprunte){
 		                    setEtat(EtatLivre.Disponible);
 		                    abonne=null;
+		                    System.out.println("le livre n'est plus disponible");
 		                    this.cancel();
 	                    }
 	                }
