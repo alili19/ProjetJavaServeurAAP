@@ -8,9 +8,7 @@ import chaipa.Bibliotheque;
 import chaipa.Livre;
 
 public class ApplicationServeur {
-	
-	private static int PORT;
-	private static Bibliotheque bibli=new Bibliotheque();
+	private static Bibliotheque bibli=Bibliotheque.getInstance();
 	
 	public static void main(String[] args) {
 	//creation de la bibliotheque
@@ -23,35 +21,15 @@ public class ApplicationServeur {
 	bibli.ajouterLivre(l2);
 	bibli.inscrireAbonne(a1);
 	bibli.inscrireAbonne(a2);
-		
-		
-		Scanner sc = new Scanner(System.in);
-			System.out.println("Bonjour, que souhaitez-vous faire ? "
-					+ "\n 1.Reserver un livre "
-					+ "\n 2.Emprunter un livre "
-					+ "\n 3. Retourner un livre");
-			int str = sc.nextInt();
-			switch (str) {
-				case 1:
-					PORT = 2500;
-					break;
-				case 2:
-					PORT = 2600;
-					break;
-				case 3:
-					PORT = 2700;
-					break;
-				default:
-					break;
-			}
 			try {
-				new Thread(new Serveur(PORT,bibli)).start();
-				System.out.println("Serveur lancé sur le port "+PORT);
+				new Thread(new Serveur(2500,bibli)).start();
+				new Thread(new Serveur(2600,bibli)).start();
+				new Thread(new Serveur(2700,bibli)).start();
+				System.out.println("Serveurs lancés");
 			} catch (IOException e) {
 				e.printStackTrace();
 				System.err.println("Pb lors de la création du serveur :"+e);
 			}
-			sc.close();
 			
 	}
 	

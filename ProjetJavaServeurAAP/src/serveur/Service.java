@@ -26,6 +26,8 @@ public class Service implements Runnable{
 		try {
 			BufferedReader lecture = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			PrintWriter ecriture = new PrintWriter(client.getOutputStream ( ), true);
+			PrintWriter out = new PrintWriter(client.getOutputStream ( ), true);
+
 			String line = lecture.readLine();
 			String[] words= line.split(";");
 			int numLivre= Integer.parseInt(words[0]);
@@ -45,13 +47,18 @@ public class Service implements Runnable{
 					ecriture.println("Vous venez de vous connecté au service de retour");
 				}			
 				
-				ecriture.println("Le livre est "+ bibli.retrouverLivre(numLivre).getEtat());
+				out.println("Le livre est "+ bibli.retrouverLivre(numLivre).getEtat());
 			
 
 		} catch (IOException | PasLibreException e) {
 				e.printStackTrace();
 		}
-		
+		try {
+			client.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

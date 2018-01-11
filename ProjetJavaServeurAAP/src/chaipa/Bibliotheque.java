@@ -6,12 +6,19 @@ public class Bibliotheque {
 
 	private ArrayList<Livre> listeLivres;
 	private ArrayList<Abonne> listeAbonnes;
+	private static Bibliotheque _instance;
 	
-	public Bibliotheque(){
+	private Bibliotheque(){
 		this.listeAbonnes= new ArrayList<Abonne>();
 		this.listeLivres= new ArrayList<Livre>();
 	}
 	
+	public static Bibliotheque getInstance(){
+		if(_instance==null){
+			_instance=new Bibliotheque();
+		}
+		return _instance;
+	}
 	
 	/*Le service ne sera ouvert qu’aux abonnés référencés de la bibliothèque 
 	 * (la création de nouveaux abonnés n’est pas au programme de ce projet)*/
@@ -59,7 +66,7 @@ public class Bibliotheque {
 	}
 	
 	
-	public void retour(int numLivre){
+	public synchronized void retour(int numLivre){
 		Livre l = retrouverLivre(numLivre);
 		Iterator<Abonne> it= listeAbonnes.iterator();
 		while(it.hasNext()){
@@ -70,14 +77,14 @@ public class Bibliotheque {
 		}
 	}
 	
-	public void emprunter(int numLivre, int numAbonne) throws PasLibreException{
+	public synchronized  void emprunter(int numLivre, int numAbonne) throws PasLibreException{
 		Livre l = retrouverLivre(numLivre);
 		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre)) || l.getEtat()==EtatLivre.Disponible){ // si numAbonne est l'abonne qui a bien reservé ce livre
 			l.emprunter(retrouverAbonne(numAbonne));
 		}
 	}
 	
-	public void reserver(int numLivre, int numAbonne) throws PasLibreException{
+	public synchronized void reserver(int numLivre, int numAbonne) throws PasLibreException{
 		Livre l = retrouverLivre(numLivre);
 		//if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre))){ 
 			l.reserver(retrouverAbonne(numAbonne));

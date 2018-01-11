@@ -12,13 +12,17 @@ public class ApplicationClient {
 	private final static String HOST = "localhost"; 
 
 	public static void main(String[] args) {
-		Socket socket = null;	
+		Socket socket = null;
+		int str=0;
 		Scanner sc = new Scanner(System.in);
+		while(str!=4){
 		System.out.println("Bonjour, que souhaitez-vous faire ? "
 				+ "\n 1.Reserver un livre "
 				+ "\n 2.Emprunter un livre "
-				+ "\n 3. Retourner un livre");
-		int str = sc.nextInt();
+				+ "\n 3. Retourner un livre"
+				+ "\n 4. Quitter");
+
+		str = sc.nextInt();
 		try {
 			switch (str) {
 			case 1:
@@ -30,6 +34,8 @@ public class ApplicationClient {
 			case 3:
 				PORT = 2700;
 				break;
+			case 4 :
+				return;
 			default:
 				break;
 			}
@@ -64,9 +70,6 @@ public class ApplicationClient {
 					// Ecrit la ligne envoyee par le serveur
 					System.out.println(line);
 				}
-				socket.close();
-				sc.close();
-			
 			} catch (IOException e) {
 				System.err.println(e); 
 			}
@@ -75,5 +78,14 @@ public class ApplicationClient {
 				if (socket != null) socket.close(); 
 			} catch (IOException e2) { ; }	
 	
+	}
+
+		try {
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sc.close();	
 	}
 }

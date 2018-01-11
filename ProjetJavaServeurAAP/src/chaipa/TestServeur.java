@@ -13,7 +13,7 @@ public class TestServeur {
 	
 	@Before
 	public void init(){
-		bibli=new Bibliotheque();
+		bibli=Bibliotheque.getInstance();
 		l1 = new Livre();
 		l2 = new Livre();
 		a1 = new Abonne();
