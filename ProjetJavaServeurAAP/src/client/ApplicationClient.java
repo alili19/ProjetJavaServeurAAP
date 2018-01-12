@@ -49,7 +49,7 @@ public class ApplicationClient {
 			BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));	
 			
 			String line;
-			System.out.println("Entrez votre numero de livre ; Entrez votre numéro d'abonné");
+			//System.out.println("Entrez votre numero de livre ; Entrez votre numéro d'abonné");
 			line = clavier.readLine();
 			
 			// envoie au serveur

@@ -1,7 +1,6 @@
 package serveur;
 
 import java.io.IOException;
-
 import chaipa.Abonne;
 import chaipa.Bibliotheque;
 import chaipa.Livre;
@@ -20,6 +19,7 @@ public class ApplicationServeur {
 	bibli.ajouterLivre(l2);
 	bibli.inscrireAbonne(a1);
 	bibli.inscrireAbonne(a2);
+	
 			try {
 				new Thread(new Serveur(2500,bibli)).start();
 				new Thread(new Serveur(2600,bibli)).start();
