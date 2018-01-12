@@ -3,6 +3,7 @@ package serveur;
 import java.io.IOException;
 import java.net.ServerSocket;
 
+import Service.Service;
 import chaipa.Bibliotheque;
 
 public class Serveur implements Runnable{
