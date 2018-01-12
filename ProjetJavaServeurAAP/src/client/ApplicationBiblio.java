@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ApplicationClient {
+public class ApplicationBiblio {
 	private static int PORT;
 	private final static String HOST = "localhost"; 
 
@@ -15,22 +15,18 @@ public class ApplicationClient {
 		Socket socket = null;
 		int str=0;
 		Scanner sc = new Scanner(System.in);
-		while(str!=3){
+		while(str!=2){
 		System.out.println("Bonjour, que souhaitez-vous faire ? "
-				+ "\n 1.Reserver un livre "
-				+ "\n 2.Emprunter un livre "
-				+ "\n 3. Quitter");
+				+ "\n 1.Retourner un livre "
+				+ "\n 2. Quitter");
 
 		str = sc.nextInt();
 		try {
 			switch (str) {
 			case 1:
-				PORT = 2500;
+				PORT = 2700;
 				break;
-			case 2:
-				PORT = 2600;
-				break;
-			case 3 :
+			case 2 :
 				return;
 			default:
 				break;
@@ -49,7 +45,7 @@ public class ApplicationClient {
 			BufferedReader clavier = new BufferedReader(new InputStreamReader(System.in));	
 			
 			String line;
-			System.out.println("Entrez votre numero de livre ; Entrez votre numéro d'abonné");
+			System.out.println("Entrez votre numero de livre ; Le livre est-il dégradé ?");
 			line = clavier.readLine();
 			
 			// envoie au serveur

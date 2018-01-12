@@ -1,7 +1,6 @@
 package serveur;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import chaipa.Abonne;
 import chaipa.Bibliotheque;

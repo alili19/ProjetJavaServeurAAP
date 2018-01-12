@@ -1,6 +1,7 @@
 package chaipa;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Timer;
 
 public class Bibliotheque {
 
@@ -66,33 +67,30 @@ public class Bibliotheque {
 	}
 	
 	
-	public synchronized void retour(int numLivre){
+	public synchronized void retour(int numLivre, boolean degradation){
 		Livre l = retrouverLivre(numLivre);
 		Iterator<Abonne> it= listeAbonnes.iterator();
 		while(it.hasNext()){
 			Abonne a = it.next();
 			if(a.getNumero()==l.getAbonne().getNumero()){
 				l.retour();
+				if (degradation){
+					this.retrouverLivre(numLivre).getAbonne().setEtat(EtatAbonne.Interdit);
+				}
+				
 			}
 		}
 	}
 	
-	public synchronized  void emprunter(int numLivre, int numAbonne) throws PasLibreException{
+	public synchronized  void emprunter(int numLivre, int numAbonne) throws PasLibreException, PasAutoriseException{
 		Livre l = retrouverLivre(numLivre);
-		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre)) || l.getEtat()==EtatLivre.Disponible){ // si numAbonne est l'abonne qui a bien reservé ce livre
+		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre)) || l.getEtat()==EtatLivre.Disponible && this.retrouverAbonne(numAbonne)!= null){ // si numAbonne est l'abonne qui a bien reservé ce livre
 			l.emprunter(retrouverAbonne(numAbonne));
 		}
 	}
 	
-	public synchronized void reserver(int numLivre, int numAbonne) throws PasLibreException{
+	public synchronized void reserver(int numLivre, int numAbonne) throws PasLibreException, PasAutoriseException{
 		Livre l = retrouverLivre(numLivre);
-		//if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre))){ 
 			l.reserver(retrouverAbonne(numAbonne));
-		//}
-	}
-	
-	public void retourner(int numLivre){
-		Livre l = retrouverLivre(numLivre);
-		l.retour();
 	}
 }

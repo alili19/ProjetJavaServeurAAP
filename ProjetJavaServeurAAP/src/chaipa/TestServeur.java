@@ -27,7 +27,12 @@ public class TestServeur {
 		bibli.inscrireAbonne(a1);
 		bibli.inscrireAbonne(a2);
 		try {
-			bibli.reserver(l1.getNumero(), a1.getNumero());
+			try {
+				bibli.reserver(l1.getNumero(), a1.getNumero());
+			} catch (PasAutoriseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (PasLibreException e) {
 			e.printStackTrace();
 		}
@@ -35,14 +40,26 @@ public class TestServeur {
 		//assertEquals(EtatLivre.Disponible,l2.getEtat());
 
 		try {
-			bibli.emprunter(l1.getNumero(),a1.getNumero());
+			try {
+				bibli.emprunter(l1.getNumero(),0);
+			} catch (PasAutoriseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (PasLibreException e) {
 			e.printStackTrace();
 		}
-		assertEquals(EtatLivre.Emprunte,l1.getEtat());		
+		assertEquals(EtatLivre.Emprunte,l1.getEtat());	
+		assertEquals(l1.getAbonne(),0);
+		
 
 		try {
-			bibli.emprunter(l2.getNumero(), a1.getNumero());
+			try {
+				bibli.emprunter(l2.getNumero(), a1.getNumero());
+			} catch (PasAutoriseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (PasLibreException e) {
 			e.printStackTrace();
 		}
@@ -50,7 +67,12 @@ public class TestServeur {
 		assertEquals(EtatLivre.Emprunte,l2.getEtat());
 	
 		try {
-			bibli.emprunter(l2.getNumero(), a2.getNumero());
+			try {
+				bibli.emprunter(l2.getNumero(), a2.getNumero());
+			} catch (PasAutoriseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} catch (PasLibreException e) {
 			e.printStackTrace();
 		}
