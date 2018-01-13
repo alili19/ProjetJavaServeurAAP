@@ -1,4 +1,4 @@
-package chaipa;
+package abonne;
 
 @SuppressWarnings("serial")
 public class PasAutoriseException extends Exception{

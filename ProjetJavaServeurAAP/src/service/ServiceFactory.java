@@ -1,8 +1,8 @@
-package Service;
+package service;
 
 import java.net.Socket;
 
-import chaipa.Bibliotheque;
+import bibliotheque.Bibliotheque;
 
 public class ServiceFactory {
 	

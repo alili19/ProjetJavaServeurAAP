@@ -1,4 +1,4 @@
-package chaipa;
+package document;
 
 public enum EtatLivre {
 		Reserve,

@@ -1,6 +1,13 @@
-package chaipa;
+package bibliotheque;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import abonne.Abonne;
+import abonne.EtatAbonne;
+import abonne.PasAutoriseException;
+import document.EtatLivre;
+import document.Livre;
+import document.PasLibreException;
 
 public class Bibliotheque {
 

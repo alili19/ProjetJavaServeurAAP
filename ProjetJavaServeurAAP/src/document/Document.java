@@ -1,4 +1,8 @@
-package chaipa;
+package document;
+
+import abonne.Abonne;
+import abonne.PasAutoriseException;
+
 public interface Document {
 	int numero();
 	void reserver(Abonne ab) throws PasLibreException, PasAutoriseException ;

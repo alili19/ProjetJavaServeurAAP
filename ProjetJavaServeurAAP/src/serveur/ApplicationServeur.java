@@ -1,9 +1,10 @@
 package serveur;
 
 import java.io.IOException;
-import chaipa.Abonne;
-import chaipa.Bibliotheque;
-import chaipa.Livre;
+
+import abonne.Abonne;
+import bibliotheque.Bibliotheque;
+import document.Livre;
 
 public class ApplicationServeur {
 	private static Bibliotheque bibli=Bibliotheque.getInstance();

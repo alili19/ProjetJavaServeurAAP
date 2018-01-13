@@ -1,12 +1,18 @@
-package chaipa;
+package test;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import abonne.Abonne;
+import abonne.PasAutoriseException;
+import bibliotheque.Bibliotheque;
+import document.EtatLivre;
+import document.Livre;
+import document.PasLibreException;
+
 public class TestServeur {
 	
-	//creation de la bibliotheque
 	Livre l1,l2;
 	Abonne a1,a2;
 	Bibliotheque bibli; 

@@ -1,4 +1,4 @@
-package chaipa;
+package abonne;
 
 public enum EtatAbonne {
 	Interdit,

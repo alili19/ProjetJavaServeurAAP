@@ -2,9 +2,10 @@ package serveur;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import Service.Service;
-import Service.ServiceFactory;
-import chaipa.Bibliotheque;
+
+import bibliotheque.Bibliotheque;
+import service.Service;
+import service.ServiceFactory;
 
 public class Serveur implements Runnable{
 
@@ -24,6 +25,7 @@ public class Serveur implements Runnable{
 	// qui va la traiter.
 	@Override
 	public void run() {
+		
 		try{
 			while(true){
 				Service service = ServiceFactory.creerService(listen_socket.accept(), bibli, PORT);
