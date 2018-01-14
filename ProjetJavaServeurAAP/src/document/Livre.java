@@ -20,7 +20,7 @@ public class Livre implements Document{
 	}
 
 	@Override
-	public synchronized void reserver(Abonne ab) throws PasLibreException, PasAutoriseException {
+	public void reserver(Abonne ab) throws PasLibreException, PasAutoriseException {
 		if (this.etat==EtatDocument.Emprunte || this.etat==EtatDocument.Reserve){
 			throw new PasLibreException("Le livre "+this.numero+ " n'est pas disponible"); 
 		}
@@ -31,11 +31,11 @@ public class Livre implements Document{
 			/*dans tous les cas le livre est reserve*/
 			setEtatDocument(EtatDocument.Reserve);
 			this.Abonne=ab; 
-	     }
+		}
 	}
 	
 	@Override
-	public synchronized void emprunter(Abonne ab) throws PasLibreException, PasAutoriseException {
+	public void emprunter(Abonne ab) throws PasLibreException, PasAutoriseException {
 		if(Abonne==null){
 			Abonne=ab;
 		}
@@ -47,7 +47,7 @@ public class Livre implements Document{
 
 	
 	@Override
-	public synchronized void retour(){
+	public void retour(){
 		if(etat==EtatDocument.Emprunte){
 			setEtatDocument(EtatDocument.Disponible);
 		}

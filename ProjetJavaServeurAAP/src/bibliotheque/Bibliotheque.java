@@ -72,33 +72,39 @@ public class Bibliotheque {
 	}
 	
 	
-	public synchronized void retour(int numDocument, boolean degradation){
-		Document l = retrouverDocument(numDocument);
-		Iterator<Abonne> it= listeAbonnes.iterator();
-		while(it.hasNext()){
-			Abonne a = it.next();
-			if(a.getNumero()==l.getAbonne().getNumero()){
-				l.retour();
-				if (degradation){
-					this.retrouverDocument(numDocument).getAbonne().setEtat(EtatAbonne.Interdit);
+	public void retour(int numDocument, boolean degradation){
+		synchronized(this) {
+			Document l = retrouverDocument(numDocument);
+			Iterator<Abonne> it= listeAbonnes.iterator();
+			while(it.hasNext()){
+				Abonne a = it.next();
+				if(a.getNumero()==l.getAbonne().getNumero()){
+					l.retour();
+					if (degradation){
+						this.retrouverDocument(numDocument).getAbonne().setEtat(EtatAbonne.Interdit);
+					}
+					
 				}
-				
 			}
 		}
 	}
 	
-	public synchronized  void emprunter(int numDocument, int numAbonne) throws PasLibreException, PasAutoriseException{
-		Document l = retrouverDocument(numDocument);
-		if (l.getEtatDocument() == EtatDocument.Emprunte) {
-			throw new PasLibreException("Le livre n'est pas disponible");
-		}
-		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverDocument(numDocument)) || l.getEtatDocument()==EtatDocument.Disponible && this.retrouverAbonne(numAbonne)!= null){ // si numAbonne est l'abonne qui a bien reservé ce Document
-			l.emprunter(retrouverAbonne(numAbonne));
+	public void emprunter(int numDocument, int numAbonne) throws PasLibreException, PasAutoriseException{
+		synchronized(this) {
+			Document l = retrouverDocument(numDocument);
+			if (l.getEtatDocument() == EtatDocument.Emprunte) {
+				throw new PasLibreException("Le livre n'est pas disponible");
+			}
+			if(bonnePersonne(retrouverAbonne(numAbonne), retrouverDocument(numDocument)) || l.getEtatDocument()==EtatDocument.Disponible && this.retrouverAbonne(numAbonne)!= null){ // si numAbonne est l'abonne qui a bien reservé ce Document
+				l.emprunter(retrouverAbonne(numAbonne));
+			}
 		}
 	}
 	
-	public synchronized void reserver(int numDocument, int numAbonne) throws PasLibreException, PasAutoriseException{
-		Document l = retrouverDocument(numDocument);
-			l.reserver(retrouverAbonne(numAbonne));
+	public void reserver(int numDocument, int numAbonne) throws PasLibreException, PasAutoriseException{
+		synchronized(this) {
+			Document l = retrouverDocument(numDocument);
+				l.reserver(retrouverAbonne(numAbonne));
+		}
 	}
 }
