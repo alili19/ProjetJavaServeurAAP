@@ -3,8 +3,11 @@ package abonne;
 @SuppressWarnings("serial")
 public class PasAutoriseException extends Exception{
 
-	public PasAutoriseException(String string) {
-		// TODO Auto-generated constructor stub
+	public PasAutoriseException(String message) {
+		super(message);
 	}
 
+	public String getMessage(){
+		return "BUG";
+	}
 }

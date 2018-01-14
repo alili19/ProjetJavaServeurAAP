@@ -89,6 +89,9 @@ public class Bibliotheque {
 	
 	public synchronized  void emprunter(int numDocument, int numAbonne) throws PasLibreException, PasAutoriseException{
 		Document l = retrouverDocument(numDocument);
+		if (l.getEtatDocument() == EtatDocument.Emprunte) {
+			throw new PasLibreException("Le livre n'est pas disponible");
+		}
 		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverDocument(numDocument)) || l.getEtatDocument()==EtatDocument.Disponible && this.retrouverAbonne(numAbonne)!= null){ // si numAbonne est l'abonne qui a bien reservé ce Document
 			l.emprunter(retrouverAbonne(numAbonne));
 		}

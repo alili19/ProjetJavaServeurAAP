@@ -36,10 +36,7 @@ public class Livre implements Document{
 	
 	@Override
 	public synchronized void emprunter(Abonne ab) throws PasLibreException, PasAutoriseException {
-		if (etat == EtatDocument.Emprunte){
-			throw new PasLibreException("Le livre "+this.numero+ " n'est pas disponible");
-		}
-		else if(Abonne==null){
+		if(Abonne==null){
 			Abonne=ab;
 		}
 		else if(ab.getEtat()== EtatAbonne.Interdit){
