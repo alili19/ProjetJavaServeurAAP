@@ -1,5 +1,7 @@
 package document;
 
+import bibliotheque.Document;
+
 @SuppressWarnings("serial")
 public class PasLibreException extends Exception {
 	

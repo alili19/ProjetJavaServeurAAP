@@ -6,7 +6,7 @@ import java.util.TimerTask;
 import abonne.EtatAbonne;
 import abonne.PasAutoriseException;
 import bibliotheque.Bibliotheque;
-import document.EtatLivre;
+import document.EtatDocument;
 import document.PasLibreException;
 
 public class ServiceEmprunt extends Service{
@@ -28,8 +28,8 @@ public class ServiceEmprunt extends Service{
 	        TimerTask rendreAbonneInterdit = new TimerTask() { // création et spécification de la tache à effectuer
 	            @Override
 	                public void run() {
-		            	if(bibli.retrouverLivre(numLivre).getEtat()!= EtatLivre.Disponible){
-		            		bibli.retrouverLivre(numLivre).getAbonne().setEtat(EtatAbonne.Interdit);
+		            	if(bibli.retrouverDocument(numLivre).getEtatDocument()!= EtatDocument.Disponible){
+		            		bibli.retrouverDocument(numLivre).getAbonne().setEtat(EtatAbonne.Interdit);
 			                 this.cancel();
 			                 
 			             }

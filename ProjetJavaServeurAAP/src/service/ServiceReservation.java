@@ -7,7 +7,7 @@ import java.util.TimerTask;
 
 import abonne.PasAutoriseException;
 import bibliotheque.Bibliotheque;
-import document.EtatLivre;
+import document.EtatDocument;
 import document.PasLibreException;
 
 public class ServiceReservation extends Service{
@@ -20,22 +20,22 @@ public class ServiceReservation extends Service{
 	@Override
 	public int appelAuService(Bibliotheque bibli, String line) {
 		String[] words= line.split(";");
-		int numLivre= Integer.parseInt(words[0]);
+		int numDocument= Integer.parseInt(words[0]);
 		int numAbonne=Integer.parseInt(words[1]);
 		try {
-			bibli.reserver(numLivre, numAbonne);
+			bibli.reserver(numDocument, numAbonne);
 	        
 			long time =30000; //7200000; // délai defini avant d'effectuer la tache
-		    TimerTask rendrelivreDispo = new TimerTask() {     // création et spécification de la tache à effectuer
+		    TimerTask rendreDocumentDispo = new TimerTask() {     // création et spécification de la tache à effectuer
 		        @Override
 		            public void run() {
-		        		if(bibli.retrouverLivre(numLivre).getEtat()!= EtatLivre.Emprunte){
-		                    bibli.retrouverLivre(numLivre).setEtat(EtatLivre.Disponible);
-		                    bibli.retrouverLivre(numLivre).setAbonne(null);
+		        		if(bibli.retrouverDocument(numDocument).getEtatDocument()!= EtatDocument.Emprunte){
+		                    bibli.retrouverDocument(numDocument).setEtatDocument(EtatDocument.Disponible);
+		                    bibli.retrouverDocument(numDocument).setAbonne(null);
 		                    
 		                    try {
 		                    	PrintWriter outReservation = new PrintWriter(getClient().getOutputStream ( ), true);
-		                    	outReservation.write("Le livre n'est plus disponible car vous ne l'avez pas emprunté dans le temps imparti.\n");
+		                    	outReservation.write("Le Document n'est plus disponible car vous ne l'avez pas emprunté dans le temps imparti.\n");
 		                    	outReservation.flush();
 		                    } 
 		                    catch (IOException e) {
@@ -47,14 +47,14 @@ public class ServiceReservation extends Service{
 		            }
 		    };
 		    
-		  /*mais si le temps est écoulé le livre est disponible 
+		  /*mais si le temps est écoulé le Document est disponible 
 		   * si il n'est toujours pas emprunté*/
-		    ExpirationReservation.schedule(rendrelivreDispo,time); 
+		    ExpirationReservation.schedule(rendreDocumentDispo,time); 
 
 		} catch (PasAutoriseException|PasLibreException e) {
 			e.printStackTrace();
 		}
-		return numLivre;
+		return numDocument;
 	}
 
 

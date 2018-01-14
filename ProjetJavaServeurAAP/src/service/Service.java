@@ -31,7 +31,7 @@ public abstract class Service implements Runnable{
 			
 			int numLivre = appelAuService(bibli, line);
 			
-			out.println("Le livre est "+ bibli.retrouverLivre(numLivre).getEtat()+"\n \n");
+			out.println("Le livre est "+ bibli.retrouverDocument(numLivre).getEtatDocument()+"\n \n");
 		} catch (IOException e) {
 				e.printStackTrace();
 		}

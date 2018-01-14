@@ -11,7 +11,6 @@ public class AppliEmprunt {
 	private final static String HOST = "localhost"; 
 
 	public static void main(String[] args) {
-		while(true){
 			Socket socket = null;
 					try {
 						socket = new Socket(HOST, PORT);
@@ -45,6 +44,6 @@ public class AppliEmprunt {
 				
 						socket.close();
 					} catch (IOException e) {e.printStackTrace();}
-			}
+		
 		}
 }

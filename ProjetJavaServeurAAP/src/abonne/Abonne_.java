@@ -1,11 +1,14 @@
 package abonne;
 
-public class Abonne {
+import document.Abonne;
+
+public class Abonne_ implements Abonne{
+	
 	private int numero;
 	private static int cpt=0;
 	EtatAbonne etat;
 
-	public Abonne(){
+	public Abonne_(){
 		this.numero=cpt++;
 		this.etat = EtatAbonne.Autorise;
 	}
@@ -17,7 +20,6 @@ public class Abonne {
 	public void setEtat(EtatAbonne etat) {
 		this.etat = etat;
 	}
-
 
 	public int getNumero() {
 		return numero;

@@ -1,6 +1,6 @@
 package document;
 
-public enum EtatLivre {
+public enum EtatDocument {
 		Reserve,
 		Emprunte,
 		Disponible;

@@ -4,16 +4,18 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import abonne.Abonne;
+import abonne.Abonne_;
 import abonne.PasAutoriseException;
 import bibliotheque.Bibliotheque;
-import document.EtatLivre;
+import bibliotheque.Document;
+import document.Abonne;
+import document.EtatDocument;
 import document.Livre;
 import document.PasLibreException;
 
 public class TestServeur {
 	
-	Livre l1,l2;
+	Document l1,l2;
 	Abonne a1,a2;
 	Bibliotheque bibli; 
 	
@@ -22,19 +24,19 @@ public class TestServeur {
 		bibli=Bibliotheque.getInstance();
 		l1 = new Livre();
 		l2 = new Livre();
-		a1 = new Abonne();
-		a2 = new Abonne();
+		a1 = new Abonne_();
+		a2 = new Abonne_();
 	}
 
 	@Test
 	public void test() {
-		bibli.ajouterLivre(l1);
-		bibli.ajouterLivre(l2);
+		bibli.ajouterDocument(l1);
+		bibli.ajouterDocument(l2);
 		bibli.inscrireAbonne(a1);
 		bibli.inscrireAbonne(a2);
 		try {
 			try {
-				bibli.reserver(l1.getNumero(), a1.getNumero());
+				bibli.reserver(l1.numero(), a1.getNumero());
 			} catch (PasAutoriseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -42,12 +44,12 @@ public class TestServeur {
 		} catch (PasLibreException e) {
 			e.printStackTrace();
 		}
-		assertEquals(EtatLivre.Reserve,l1.getEtat());
-		//assertEquals(EtatLivre.Disponible,l2.getEtat());
+		assertEquals(EtatDocument.Reserve,l1.getEtatDocument());
+		//assertEquals(EtatLivre.Disponible,l2.getEtatDocument());
 
 		try {
 			try {
-				bibli.emprunter(l1.getNumero(),0);
+				bibli.emprunter(l1.numero(),0);
 			} catch (PasAutoriseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -55,13 +57,13 @@ public class TestServeur {
 		} catch (PasLibreException e) {
 			e.printStackTrace();
 		}
-		assertEquals(EtatLivre.Emprunte,l1.getEtat());	
+		assertEquals(EtatDocument.Emprunte,l1.getEtatDocument());	
 		assertEquals(l1.getAbonne(),0);
 		
 
 		try {
 			try {
-				bibli.emprunter(l2.getNumero(), a1.getNumero());
+				bibli.emprunter(l2.numero(), a1.getNumero());
 			} catch (PasAutoriseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -70,11 +72,11 @@ public class TestServeur {
 			e.printStackTrace();
 		}
 
-		assertEquals(EtatLivre.Emprunte,l2.getEtat());
+		assertEquals(EtatDocument.Emprunte,l2.getEtatDocument());
 	
 		try {
 			try {
-				bibli.emprunter(l2.getNumero(), a2.getNumero());
+				bibli.emprunter(l2.numero(), a2.getNumero());
 			} catch (PasAutoriseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

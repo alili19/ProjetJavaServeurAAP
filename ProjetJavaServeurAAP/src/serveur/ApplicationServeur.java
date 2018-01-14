@@ -2,8 +2,10 @@ package serveur;
 
 import java.io.IOException;
 
-import abonne.Abonne;
+import abonne.Abonne_;
 import bibliotheque.Bibliotheque;
+import bibliotheque.Document;
+import document.Abonne;
 import document.Livre;
 
 public class ApplicationServeur {
@@ -11,13 +13,13 @@ public class ApplicationServeur {
 	
 	public static void main(String[] args) {
 	//creation de la bibliotheque
-	Livre l1 = new Livre();
-	Livre l2 = new Livre();
-	Abonne a1 = new Abonne();
-	Abonne a2 = new Abonne();
+	Document l1 = new Livre();
+	Document l2 = new Livre();
+	Abonne a1 = new Abonne_();
+	Abonne a2 = new Abonne_();
 	
-	bibli.ajouterLivre(l1);
-	bibli.ajouterLivre(l2);
+	bibli.ajouterDocument(l1);
+	bibli.ajouterDocument(l2);
 	bibli.inscrireAbonne(a1);
 	bibli.inscrireAbonne(a2);
 	

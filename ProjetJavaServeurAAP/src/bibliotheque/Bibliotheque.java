@@ -2,22 +2,21 @@ package bibliotheque;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import abonne.Abonne;
 import abonne.EtatAbonne;
 import abonne.PasAutoriseException;
-import document.EtatLivre;
-import document.Livre;
+import document.Abonne;
+import document.EtatDocument;
 import document.PasLibreException;
 
 public class Bibliotheque {
 
-	private ArrayList<Livre> listeLivres;
+	private ArrayList<Document> listeDocuments;
 	private ArrayList<Abonne> listeAbonnes;
 	private static Bibliotheque _instance;
 	
 	private Bibliotheque(){
 		this.listeAbonnes= new ArrayList<Abonne>();
-		this.listeLivres= new ArrayList<Livre>();
+		this.listeDocuments= new ArrayList<Document>();
 	}
 	
 	public static Bibliotheque getInstance(){
@@ -34,8 +33,8 @@ public class Bibliotheque {
 		listeAbonnes.add(abonne);
 	}
 	
-	public void ajouterLivre(Livre livre){
-		listeLivres.add(livre);
+	public void ajouterDocument(Document Document){
+		listeDocuments.add(Document);
 	}
 	
 	
@@ -50,20 +49,20 @@ public class Bibliotheque {
 		return null;
 	}
 	
-	public Livre retrouverLivre(int numeroLivre){
-		Iterator<Livre> it= listeLivres.iterator();
+	public Document retrouverDocument(int numeroDocument){
+		Iterator<Document> it= listeDocuments.iterator();
 		while(it.hasNext()){
-			Livre l = it.next();
-			if(l.numero()==numeroLivre){
+			Document l = it.next();
+			if(l.numero()==numeroDocument){
 				return l;
 			}
 		}
 		return null;
 	}
 	
-	public boolean bonnePersonne(Abonne ab,Livre l){
+	public boolean bonnePersonne(Abonne ab,Document l){
 		boolean reserver;
-		if(l.getAbonne()==ab && l.getEtat()==EtatLivre.Reserve){
+		if(l.getAbonne()==ab && l.getEtatDocument()==EtatDocument.Reserve){
 			reserver=true;
 		}
 		else{
@@ -73,30 +72,30 @@ public class Bibliotheque {
 	}
 	
 	
-	public synchronized void retour(int numLivre, boolean degradation){
-		Livre l = retrouverLivre(numLivre);
+	public synchronized void retour(int numDocument, boolean degradation){
+		Document l = retrouverDocument(numDocument);
 		Iterator<Abonne> it= listeAbonnes.iterator();
 		while(it.hasNext()){
 			Abonne a = it.next();
 			if(a.getNumero()==l.getAbonne().getNumero()){
 				l.retour();
 				if (degradation){
-					this.retrouverLivre(numLivre).getAbonne().setEtat(EtatAbonne.Interdit);
+					this.retrouverDocument(numDocument).getAbonne().setEtat(EtatAbonne.Interdit);
 				}
 				
 			}
 		}
 	}
 	
-	public synchronized  void emprunter(int numLivre, int numAbonne) throws PasLibreException, PasAutoriseException{
-		Livre l = retrouverLivre(numLivre);
-		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverLivre(numLivre)) || l.getEtat()==EtatLivre.Disponible && this.retrouverAbonne(numAbonne)!= null){ // si numAbonne est l'abonne qui a bien reservé ce livre
+	public synchronized  void emprunter(int numDocument, int numAbonne) throws PasLibreException, PasAutoriseException{
+		Document l = retrouverDocument(numDocument);
+		if(bonnePersonne(retrouverAbonne(numAbonne), retrouverDocument(numDocument)) || l.getEtatDocument()==EtatDocument.Disponible && this.retrouverAbonne(numAbonne)!= null){ // si numAbonne est l'abonne qui a bien reservé ce Document
 			l.emprunter(retrouverAbonne(numAbonne));
 		}
 	}
 	
-	public synchronized void reserver(int numLivre, int numAbonne) throws PasLibreException, PasAutoriseException{
-		Livre l = retrouverLivre(numLivre);
+	public synchronized void reserver(int numDocument, int numAbonne) throws PasLibreException, PasAutoriseException{
+		Document l = retrouverDocument(numDocument);
 			l.reserver(retrouverAbonne(numAbonne));
 	}
 }

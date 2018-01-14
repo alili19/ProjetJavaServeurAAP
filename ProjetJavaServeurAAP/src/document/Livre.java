@@ -1,17 +1,17 @@
 package document;
-import abonne.Abonne;
-import abonne.EtatAbonne;
 import abonne.PasAutoriseException;
+import bibliotheque.Document;
+import abonne.EtatAbonne;
 
 public class Livre implements Document{
 	private int numero;
 	private static int cpt=0;
-	private EtatLivre etat;
-	private Abonne abonne;
+	private EtatDocument etat;
+	private Abonne Abonne;
 	
 	public Livre(){
 		this.numero = cpt++;
-		this.etat = EtatLivre.Disponible;
+		this.etat = EtatDocument.Disponible;
 	}
 	
 	@Override
@@ -21,55 +21,48 @@ public class Livre implements Document{
 
 	@Override
 	public synchronized void reserver(Abonne ab) throws PasLibreException, PasAutoriseException {
-		if (this.etat==EtatLivre.Emprunte || this.etat==EtatLivre.Reserve){
+		if (this.etat==EtatDocument.Emprunte || this.etat==EtatDocument.Reserve){
 			throw new PasLibreException("Le livre "+this.numero+ " n'est pas disponible"); 
 		}
 		else if(ab.getEtat()== EtatAbonne.Interdit){
-			throw new PasAutoriseException("L'abonne "+ab.getNumero()+ " est interdit"); 
+			throw new PasAutoriseException("L'Abonne "+ab.getNumero()+ " est interdit"); 
 		}
 		else{
 			/*dans tous les cas le livre est reserve*/
-			setEtat(EtatLivre.Reserve);
-			this.abonne=ab; 
+			setEtatDocument(EtatDocument.Reserve);
+			this.Abonne=ab; 
 	     }
 	}
 	
 	@Override
 	public synchronized void emprunter(Abonne ab) throws PasLibreException, PasAutoriseException {
-		if (etat == EtatLivre.Emprunte){
+		if (etat == EtatDocument.Emprunte){
 			throw new PasLibreException("Le livre "+this.numero+ " n'est pas disponible");
 		}
-		else if(abonne==null){
-			abonne=ab;
+		else if(Abonne==null){
+			Abonne=ab;
 		}
 		else if(ab.getEtat()== EtatAbonne.Interdit){
-			throw new PasAutoriseException("L'abonne "+ab.getNumero()+ " est interdit"); 
+			throw new PasAutoriseException("L'Abonne "+ab.getNumero()+ " est interdit"); 
 		}
-		setEtat(EtatLivre.Emprunte);
+		setEtatDocument(EtatDocument.Emprunte);
 	}
 
 	
 	@Override
 	public synchronized void retour(){
-		if(etat==EtatLivre.Emprunte){
-			setEtat(EtatLivre.Disponible);
+		if(etat==EtatDocument.Emprunte){
+			setEtatDocument(EtatDocument.Disponible);
 		}
 	}
-	
-	public EtatLivre getEtat() {
-		return etat;
-	}
 
-	public void setEtat(EtatLivre etat) {
-		this.etat = etat;
-	}
-
+	@Override
 	public Abonne getAbonne() {
-		return abonne;
+		return Abonne;
 	}
 
-	public void setAbonne(Abonne abonne) {
-		this.abonne = abonne;
+	public void setAbonne(Abonne Abonne) {
+		this.Abonne = Abonne;
 	}
 	public int getNumero() {
 		return numero;
@@ -77,6 +70,16 @@ public class Livre implements Document{
 
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	@Override
+	public EtatDocument getEtatDocument() {
+		return etat;
+	}
+
+	@Override
+	public void setEtatDocument(EtatDocument e) {
+		this.etat = e;
 	}
 	
 	
